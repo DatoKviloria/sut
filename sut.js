@@ -59,12 +59,9 @@ Assert.Equal = (val_1, val_2, data) => {
 
 Assert.ArrayEqual = (val_1, val_2, data) => {
 
+  var add =(a, b) => { return a + b; }
   var sum1 = val_1.reduce(add, 0);
   var sum2 = val_2.reduce(add, 0);
-
-  function add(a, b) {
-      return a + b;
-  }
   
   ((sum1 == sum2) ? SUTMessage(true, data) : SUTMessage(false, data) );
 }
@@ -72,12 +69,9 @@ Assert.ArrayEqual = (val_1, val_2, data) => {
 
 Assert.ArrayNotEqual = (val_1, val_2, data) => {
 
+  var add =(a, b) => { return a + b; }
   var sum1 = val_1.reduce(add, 0);
   var sum2 = val_2.reduce(add, 0);
-
-  var add = (a, b) => {
-      return a + b;
-  }
   
   ((sum1 != sum2) ? SUTMessage(true, data) : SUTMessage(false, data) );
 }
