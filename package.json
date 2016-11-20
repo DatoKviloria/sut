@@ -1,6 +1,6 @@
 {
   "name": "sut",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "Small Unit Test Module For NodeJs",
   "main": "sut.js",
   "scripts": {
