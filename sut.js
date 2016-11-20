@@ -1,8 +1,7 @@
-const util = require('util');
-const event = require('events');
+var SUTerr = '(SUTestJS) Err:'
+var SUTwar = '(SUTestJS) War:'
 
-
-var SUTerr = '<(SUTestJS)> Error:'
+var assert = require('assert')
 
 var Assert = {
   passed: [],
@@ -22,7 +21,6 @@ const colors = {
   White: "\x1b[37m",
   Crimson: "\x1b[38m"
 },
-
  bg: {
   Black: "\x1b[40m",
   Red: "\x1b[41m",
@@ -34,38 +32,85 @@ const colors = {
   White: "\x1b[47m",
   Crimson: "\x1b[48m"
  }
-
 };
+
+Assert.date = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
+var SUTMessage = (param, data) => {
+
+    if(param) {
+      console.log(colors.bg.Green, "<o>", colors.bg.Black,  colors.fg.White, '\tTime:', Assert.date,  '\tID:', Assert.passed.push(data), ' ', '\tDescription:\t' ,data, colors.bg.Black,  colors.fg.White)
+    } else {
+      console.log(colors.bg.Red, "<x>", colors.bg.Black,  colors.fg.White, '\tTime:', Assert.date, '\tID:', Assert.failed.push(data), ' ' , '\tDescription:\t' ,data,colors.bg.Black, colors.fg.White)
+    }
+
+}
 
 
 Assert.Equal = (val_1, val_2, data) => {
-  ((val_1 == val_2) ? console.log(colors.bg.Green, "<o>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.passed.push(data), ' ', '\tDescription:\t' ,data, colors.bg.Black,  colors.fg.White)
-  : console.log(colors.bg.Red, "<x>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.failed.push(data), ' ' , '\tDescription:\t' ,data,colors.bg.Black, colors.fg.White) );
-}
 
-Assert.notEqual = (val_1, val_2, data) => {
-  ((val_1 != val_2) ? console.log(colors.bg.Green, "<o>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.passed.push(data), ' ', '\tDescription:\t' ,data, colors.bg.Black,  colors.fg.White)
-  : console.log(colors.bg.Red, "<x>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.failed.push(data), ' ' , '\tDescription:\t' ,data,colors.bg.Black, colors.fg.White) );
-}
-
-Assert.typeEqual = (val_1, val_2, data) => {
-  ((typeof val_1 == typeof val_2) ? console.log(colors.bg.Green, "<o>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.passed.push(data), ' ', '\tDescription:\t' ,data, colors.bg.Black,  colors.fg.White)
-  : console.log(colors.bg.Red, "<x>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.failed.push(data), ' ' , '\tDescription:\t' ,data,colors.bg.Black, colors.fg.White) );
-}
-
-Assert.typeNotEqual = (val_1, val_2, data) => {
-  ((typeof val_1 != typeof val_2) ? console.log(colors.bg.Green, "<o>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.passed.push(data), ' ', '\tDescription:\t' ,data, colors.bg.Black,  colors.fg.White)
-  : console.log(colors.bg.Red, "<x>", colors.bg.Black,  colors.fg.White, '\tID:', Assert.failed.push(data), ' ' , '\tDescription:\t' ,data,colors.bg.Black, colors.fg.White) );
+  if(typeof val_1 == typeof [0,0] && typeof val_2  == typeof [0,0])
+      ((val_1.length == val_2.length) ? SUTMessage(true, data) : SUTMessage(false, data) );
+  else
+      ((val_1 == val_2) ? SUTMessage(true, data) : SUTMessage(false, data) );
 }
 
 
-Assert.Failed = () =>{
-    console.log()
+
+Assert.ArrayEqual = (val_1, val_2, data) => {
+
+  var sum1 = val_1.reduce(add, 0);
+  var sum2 = val_2.reduce(add, 0);
+
+  function add(a, b) {
+      return a + b;
+  }
+  
+  ((sum1 == sum2) ? SUTMessage(true, data) : SUTMessage(false, data) );
 }
 
-Assert.Passed = () =>{
-    console.log()
+
+Assert.ArrayNotEqual = (val_1, val_2, data) => {
+
+  var sum1 = val_1.reduce(add, 0);
+  var sum2 = val_2.reduce(add, 0);
+
+  var add = (a, b) => {
+      return a + b;
+  }
+  
+  ((sum1 != sum2) ? SUTMessage(true, data) : SUTMessage(false, data) );
 }
+
+
+Assert.NotEqual = (val_1, val_2, data) => {
+  
+  if(typeof val_1 == typeof [0,0] && typeof val_2  == typeof [0,0])
+      ((val_1.length != val_2.length) ? SUTMessage(true, data) : SUTMessage(false, data) );
+  else
+      ((val_1 != val_2) ? SUTMessage(true, data) : SUTMessage(false, data) );
+}
+
+
+Assert.TypeEqual = (val_1, val_2, data) => {
+  ((typeof val_1 == typeof val_2) ? SUTMessage(true, data) : SUTMessage(false, data) );
+}
+
+
+Assert.TypeNotEqual = (val_1, val_2, data) => {
+  ((typeof val_1 != typeof val_2) ? SUTMessage(true, data)  : SUTMessage(false, data)  );
+}
+
+
+Assert.Fail = (val_1, val_2, data) => {
+  ((val_1 < val_2) ? SUTMessage(true, data) : SUTMessage(false, data))
+}
+
+
+Assert.Ok = (val_1, val_2, data) => {
+    ((val_1 > val_2) ? SUTMessage(true, data) : SUTMessage(false, data))
+}
+
 
 Assert.TestSatat = () =>{
   console.log(colors.bg.Green,'Passed Test:', colors.bg.Black, Assert.passed.length, '\t', colors.bg.Red,'Failed Test:', colors.bg.Black, Assert.failed.length)
@@ -75,19 +120,36 @@ Assert.TestSatat = () =>{
 Assert.InitTest = (param) =>{
     console.log(colors.bg.Blue+'\nSUTest Name:', colors.bg.Black , param, '\n');
     Assert.TestSatat()
-    //Assert.Passed()
+}
+
+
+var SUTHandler = (text, type) => {
+
+  if(text === undefined || type === undefined)
+    console.log('\n'+colors.fg.Yellow+SUTwar, 'SUTHandler Needs `text` And `type` Params', colors.fg.White)
+  else
+
+    if( type == 0 || type == '0')
+      console.log('\n'+colors.fg.Yellow+SUTwar, text, colors.fg.White)
+
+    else if(type == 1 || type == '1')
+      console.log('\n'+colors.fg.Red+SUTwar, text, colors.fg.White)
+
+    else
+      console.log('\n'+colors.fg.Yellow+SUTwar, 'Unknown SUTHandler Type: Warr = 0 And Err = 1', colors.fg.White)
+
 }
 
 var SUTClass = (sutName, callback) =>{
 
   if (  typeof sutName !== 'string' )
-    throw new Error(SUTerr, 'Function SUTest(sutName, callback) sutName can\'t be', typeof sutName)
+    SUTHandler('Function SUTest(sutName, callback) sutName can\'t be '+ typeof sutName, 1)
 
   else if ( typeof callback === 'function' )
     return console.log('\n'), callback(sutName)
 
   else
-    throw new Error(SUTerr, 'Function SUTest(sutName, callback) Need CallBack Function, Did You Forogt?')
+    SUTHandler('Function SUTest(sutName, callback) Need CallBack Function, Did You Forogt?', 0)
 
 }
 

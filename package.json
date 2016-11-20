@@ -1,10 +1,17 @@
 {
-  "name": "sut.js",
-  "version": "0.0.1",
-  "description": "Small Unit Test Module",
-  "main": "index.js",
+  "name": "sut",
+  "version": "0.0.9",
+  "description": "Small Unit Test Module For NodeJs",
+  "main": "sut.js",
   "scripts": {
-    "start": "node suit.js"
+    "start": "node sut.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/datokviloria/sut.git"
+  },
+  "bugs": {
+    "url": "https://github.com/datokviloria/sut/issues"
   },
   "keywords": [
     "Unit",
@@ -13,6 +20,13 @@
     "Development",
     "UTD"
   ],
-  "author": "David Kviloria (KviloSoft)",
-  "license": "MIT"
+  "author": {
+    "name": "David Kviloria",
+    "email": "datokviloria@gmail.com",
+    "url": "KviloSoft"
+  },
+  "license": "MIT",
+  "readme": "ERROR: No README data found!",
+  "_id": "sut@0.0.9",
+  "_from": "sut@"
 }
