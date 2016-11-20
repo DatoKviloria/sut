@@ -1,6 +1,6 @@
 {
   "name": "sut",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Small Unit Test Module For NodeJs",
   "main": "sut.js",
   "scripts": {
@@ -18,15 +18,29 @@
     "Test",
     "Driven",
     "Development",
-    "UTD"
+    "TTD",
+    "Small",
+    "Fast",
+    "SUT",
+    "SUTJS",
+    "Framework"
   ],
   "author": {
     "name": "David Kviloria",
     "email": "datokviloria@gmail.com",
     "url": "KviloSoft"
   },
+
+  "engines": {
+    "node": ">=6.0.0"
+  },
+
+  "files": [
+    "LICENSE",
+    "README.md",
+    "sut.js"
+  ],
   "license": "MIT",
-  "readme": "ERROR: No README data found!",
   "_id": "sut@0.0.9",
   "_from": "sut@"
 }

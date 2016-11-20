@@ -1,3 +1,5 @@
+'use strict';
+
 var SUTerr = '(SUTestJS) Err:'
 var SUTwar = '(SUTestJS) War:'
 
