@@ -1,18 +1,77 @@
 {
-  "name": "sut",
-  "version": "1.1.1",
-  "description": "Small Unit Test Module For NodeJs",
-  "main": "sut.js",
-  "scripts": {
-    "start": "node sut.js"
+  "_args": [
+    [
+      {
+        "raw": "sut",
+        "scope": null,
+        "escapedName": "sut",
+        "name": "sut",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\Kvilo\\Desktop\\test_perform"
+    ]
+  ],
+  "_from": "sut@latest",
+  "_id": "sut@1.1.1",
+  "_inCache": true,
+  "_location": "/sut",
+  "_nodeVersion": "6.8.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/sut-1.1.1.tgz_1479647907686_0.7841837522573769"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/datokviloria/sut.git"
+  "_npmUser": {
+    "name": "kvilo",
+    "email": "datokviloria@gmail.com"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "sut",
+    "scope": null,
+    "escapedName": "sut",
+    "name": "sut",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/sut/-/sut-1.1.1.tgz",
+  "_shasum": "4f87c4ea74bf6da1f55c35ff140e4d723c6fd285",
+  "_shrinkwrap": null,
+  "_spec": "sut",
+  "_where": "C:\\Users\\Kvilo\\Desktop\\test_perform",
+  "author": {
+    "name": "David Kviloria",
+    "email": "datokviloria@gmail.com",
+    "url": "KviloSoft"
   },
   "bugs": {
     "url": "https://github.com/datokviloria/sut/issues"
   },
+  "dependencies": {},
+  "description": "Small Unit Test Module For NodeJs",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "4f87c4ea74bf6da1f55c35ff140e4d723c6fd285",
+    "tarball": "https://registry.npmjs.org/sut/-/sut-1.1.1.tgz"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "sut.js"
+  ],
+  "gitHead": "dbd4b30851e10b1f27249a2bd05648f2152ca3f0",
+  "homepage": "https://github.com/datokviloria/sut#readme",
   "keywords": [
     "Unit",
     "Test",
@@ -25,22 +84,23 @@
     "SUTJS",
     "Framework"
   ],
-  "author": {
-    "name": "David Kviloria",
-    "email": "datokviloria@gmail.com",
-    "url": "KviloSoft"
-  },
-
-  "engines": {
-    "node": ">=6.0.0"
-  },
-
-  "files": [
-    "LICENSE",
-    "README.md",
-    "sut.js"
-  ],
   "license": "MIT",
-  "_id": "sut@0.0.9",
-  "_from": "sut@"
+  "main": "sut.js",
+  "maintainers": [
+    {
+      "name": "kvilo",
+      "email": "dkviloria@gmail.com"
+    }
+  ],
+  "name": "sut",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/datokviloria/sut.git"
+  },
+  "scripts": {
+    "start": "node sut.js"
+  },
+  "version": "1.1.1"
 }

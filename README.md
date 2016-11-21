@@ -4,8 +4,8 @@ SUT is Fast, minimalist TDD framework for node. <br /> <br />
 <img src="https://travis-ci.org/DatoKviloria/sut.svg?branch=master" />
 
  <br />
-version: 1.1.1 <br />
-Stabile: 1.1.1
+version: 1.0.0 <br />
+Stabile: 1.0.0
 
 ## Install
 ```
