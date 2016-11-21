@@ -18,6 +18,7 @@ npm install sut --save
 
 const sut = require('sut')
 
+
 /*
 * Write Some Functions For Check
 */
@@ -35,48 +36,53 @@ var var_2 = Number(var_1)
 /*
 * Write Tests For Code
 */
-
 sut.SUTClass('Global Test', (data) => {
 
-    // Equal Test For Sqrt Function
-    sut.Assert.Equal(sqrt(2), 4, 'sqrt(2) == 4')
 
-    // Equal Test For oddorEven Function
-    sut.Assert.Equal(oddorEven(8), 'odd', '8 is odd')
+  sut.SUTFunc('Func Sqrt()', () => {
+       // Equal Test For Sqrt Function
+       sut.Assert.Equal(sqrt(2), 4, 'sqrt(2) == 4')
+  })
 
-    // Compare Array Length
-    sut.Assert.Equal([5, 8, 9, 15], [7, 8, 9], 'Arr_1 == Arr_2')
+  sut.SUTFunc('Func oddorEven()', () => {
+	   // Equal Test For oddorEven Function
+       sut.Assert.Equal(oddorEven(8), 'odd', '8 is odd')
+  })
+  
+  sut.SUTFunc('Array Tests', () => {
+       // Compare Array Length
+       sut.Assert.Equal([5, 8, 9, 15], [7, 8, 9], 'Arr_1 == Arr_2')
+       // Compare Array Length
+       sut.Assert.Equal([5, 8, 9], [7, 8, 9], 'Arr_1 == Arr_2')
+       // Compare Array Element Sum
+       sut.Assert.ArrayEqual([5, 4, 1], [5, 4, 2], 'Arr_1 sum == Arr_2 sum')
+  })
+  
+  sut.SUTFunc('Func Sqrt()', () => {
+      sut.Assert.ArrayNotEqual([5, 2], [5, 4], 'Arr_1 sum != Arr_2 sum') 
+      // Compare Array Element Sum
+      sut.Assert.ArrayEqual([2, 1], [2, 1], 'Arr_1 sum == Arr_2 sum')
+      // Compare two var | x < y ? true : false
+      sut.Assert.Fail(-5, 5, '-5 < 5')
+      // Compare two var | x > y ? true : false
+      sut.Assert.Ok(75, -75, '75 > -75')
+  })
+  
+  
+  sut.SUTFunc('Variable Tests', () => {
+	   // TypeEqual Test For Variavles
+       sut.Assert.TypeEqual(var_1, String(), 'var_1 is String')
+       // TypeEqual Test For Variavles   
+       sut.Assert.TypeNotEqual(var_2, Number(), 'var_2 is Number and it will fail')
+  })
 
-    // Compare Array Length
-    sut.Assert.Equal([5, 8, 9], [7, 8, 9], 'Arr_1 == Arr_2')
-
-    // TypeEqual Test For Variavles
-    sut.Assert.TypeEqual(var_1, String(), 'var_1 is String')
-
-    // TypeEqual Test For Variavles   
-    sut.Assert.TypeNotEqual(var_2, Number(), 'var_2 is Number and it will fail')
-
-    // Compare Array Element Sum
-    sut.Assert.ArrayEqual([5, 4, 1], [5, 4, 2], 'Arr_1 sum == Arr_2 sum')
-    
-    sut.Assert.ArrayNotEqual([5, 2], [5, 4], 'Arr_1 sum != Arr_2 sum')
-    
-    // Compare Array Element Sum
-    sut.Assert.ArrayEqual([2, 1], [2, 1], 'Arr_1 sum == Arr_2 sum')
-
-    // Compare two var | x < y ? true : false
-    sut.Assert.Fail(-5, 5, '-5 < 5')
-
-    // Compare two var | x > y ? true : false
-    sut.Assert.Ok(75, -75, '75 > -75')
-
-    // Get Statisti
-    sut.Assert.InitTest(data)
-
+  
+  sut.Init(data)
 })
+
 ```
 # Code Result
-<img src="https://s18.postimg.org/i293ddkll/sut.png" />
+<img src="https://s18.postimg.org/l8nu0abs9/passed.png" />
 
 
 ## Recomended Tools
