@@ -1,4 +1,4 @@
-const { Assert, Func, Class, Super } = require('sut');
+const { Assert, Func, Class, Super } = require('./index');
 
 
 var odd = (x) => {
