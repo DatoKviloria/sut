@@ -1,7 +1,7 @@
 {
   "name": "sut",
   "version": "1.6.0",
-  "description": "Small Unit Test For Node",
+  "description": "Small TDD lib for node",
   "main": "./index",
   "scripts": {
     "start": "node index.js"
