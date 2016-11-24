@@ -34,20 +34,20 @@ var var_2 = Number(var_1)
 /*
 * Write Tests For Code
 */
-sut.SUTClass('Global Test', (data) => {
+sut.Class('Global Test', (data) => {
 
 
-  sut.SUTFunc('Func Sqrt()', () => {
+  sut.Func('Func Sqrt()', () => {
        // Equal Test For Sqrt Function
        sut.Assert.Equal(sqrt(2), 4, 'sqrt(2) == 4')
   })
 
-  sut.SUTFunc('Func oddorEven()', () => {
+  sut.Func('Func oddorEven()', () => {
 	   // Equal Test For oddorEven Function
        sut.Assert.Equal(oddorEven(8), 'odd', '8 is odd')
   })
   
-  sut.SUTFunc('Array Tests', () => {
+  sut.Func('Array Tests', () => {
        // Compare Array Length
        sut.Assert.Equal([5, 8, 9, 15], [7, 8, 9], 'Arr_1 == Arr_2')
        // Compare Array Length
@@ -56,7 +56,7 @@ sut.SUTClass('Global Test', (data) => {
        sut.Assert.ArrayEqual([5, 4, 1], [5, 4, 2], 'Arr_1 sum == Arr_2 sum')
   })
   
-  sut.SUTFunc('Func Sqrt()', () => {
+  sut.Func('Func Sqrt()', () => {
       sut.Assert.ArrayNotEqual([5, 2], [5, 4], 'Arr_1 sum != Arr_2 sum') 
       // Compare Array Element Sum
       sut.Assert.ArrayEqual([2, 1], [2, 1], 'Arr_1 sum == Arr_2 sum')
@@ -67,7 +67,7 @@ sut.SUTClass('Global Test', (data) => {
   })
   
   
-  sut.SUTFunc('Variable Tests', () => {
+  sut.Func('Variable Tests', () => {
 	   // TypeEqual Test For Variavles
        sut.Assert.TypeEqual(var_1, String(), 'var_1 is String')
        // TypeEqual Test For Variavles   
@@ -75,7 +75,7 @@ sut.SUTClass('Global Test', (data) => {
   })
 
   
-  sut.Init(data)
+  sut.Super(data)
 })
 
 ```

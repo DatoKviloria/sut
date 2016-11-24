@@ -1,10 +1,10 @@
 {
   "name": "sut",
-  "version": "1.5.8",
+  "version": "1.6.0",
   "description": "Small Unit Test For Node",
-  "main": "sut.js",
+  "main": "./index",
   "scripts": {
-    "start": "node sut.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,11 @@
     "Driven",
     "Development",
     "FrameWork",
-    "Unit"
+    "Unit",
+    "test",
+    "assertion",
+    "assert",
+    "testing"
   ],
   "author": "David Kviloria",
   "license": "MIT"
