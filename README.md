@@ -10,6 +10,8 @@ SUT is Fast, minimalist TDD framework for node. <br /> <br />
 npm install sut --save
 ```
 
+[WIKI AND API PAGE](https://sutjs.github.io/docs/)
+
 ## Usage && Code Example
 
 ```javascript
