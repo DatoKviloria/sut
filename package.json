@@ -1,6 +1,6 @@
 {
   "name": "sut",
-  "version": "1.6.2",
+  "version": "1.6.2f",
   "description": "Small TDD lib for node",
   "main": "./index",
   "scripts": {
