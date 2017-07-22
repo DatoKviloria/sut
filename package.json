@@ -1,6 +1,6 @@
 {
   "name": "sut",
-  "version": "1.6.2f",
+  "version": "2.0",
   "description": "Small TDD lib for node",
   "main": "./index",
   "scripts": {
@@ -23,6 +23,10 @@
     "assert",
     "testing"
   ],
-  "author": "David Kviloria",
-  "license": "MIT"
+  "author": "David Kviloria <datokviloria@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "convert-hrtime": "^2.0.0",
+    "setprototypeof": "^1.0.3"
+  }
 }

@@ -16,18 +16,16 @@ npm install sut --save
 
 ```javascript
 
-const { Assert, Func, Class, Super } = require('sut');
+const { sut, assert, def } = require('sut');
+
+let odd = (x) => (x % 2 == 0) ? true : false
 
 
-var odd = (x) => {
-    return (x % 2 == 0) ? true : false;
-}
+sut('Global Test For App.js', (data) =>{
 
-
-Class('Global Test For App.js', (data) =>{
     var bla = 12;
 
-    Func('Fuc One', (desc) => {
+    def('Fuc One', (desc) => {
         Assert.ok(false)
         Assert.ok(true)
         Assert.ok(false)
@@ -38,9 +36,9 @@ Class('Global Test For App.js', (data) =>{
     })
 
 
-    Super(data)
-
+    sut.getStat(data)
 })
+
 
 ```
 # Code Result
