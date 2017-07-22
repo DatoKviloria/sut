@@ -10,44 +10,90 @@ SUT is Fast, minimalist TDD framework for node. <br /> <br />
 npm install sut --save
 ```
 
-[WIKI AND API PAGE](https://sutjs.github.io/docs/)
+[WIKI and API page for version: 1.6.2f](https://sutjs.github.io/docs/)
 
-## Usage && Code Example
+## Usage && Code Example for v 2.0.0
 
 ```javascript
 
-const { sut, assert, def } = require('sut');
+/*
+* New Update
+* Migration to 2.0.0
+*/
 
-let odd = (x) => (x % 2 == 0) ? true : false
+const { sut, def, assert } = require('sut');
+
+let odd = x => (x % 2 == 0) ? true : false
+
+let countDonw = num => {
+  if(num === 0){ return }
+  countDonw(num-1);
+}
+
+let upper = x => x.toUpperCase()
+let exclime = x => x.concat('!')
+let undef
+
+/*
+* Custom miidleware
+*/
+const stringSizeParser = {
+  size: (val) => {
+    return val.length
+  }
+};
+
+/*
+* apply Middleware
+*/
+sut.upload(stringSizeParser)
 
 
-sut('Global Test For App.js', (data) =>{
+/*
+* create strategy function
+*/
+let TestStrategyOne = () => {
+  def('Test One', () => {
+    assert.equal(
+      sut.pipe(upper, exclime)('david'),
+      'DAVID!',
+      'this should be DAVID!'
+    )
+  })
+};
 
-    var bla = 12;
+let TestStrategyTwo = () => {
+  def('Test Two', () => {
+    assert.equal(odd(8), true, '5 is not odd')
+    assert.ok(true, 'is should be ok')
+  })
+};
 
-    def('Fuc One', (desc) => {
-        Assert.ok(false)
-        Assert.ok(true)
-        Assert.ok(false)
-    })
+let TestStrategyThree = () => {
+  def('Test Three', () => {
+    assert.undefined(undef, 'this will be ok')
+  })
+};
 
-    Func('Func Two', (desc) => {
-        Assert.equal(odd(5), true, '5 is not odd')
-    })
-
-
-    sut.getStat(data)
-})
-
+/*
+* Run strategy group using sut
+*/
+sut('This is test for App')
+(
+  TestStrategyOne,
+  TestStrategyTwo,
+  TestStrategyThree,
+  sut.getStats
+)
 
 ```
 # Code Result
-<img src="https://s12.postimg.org/97he0ggq5/sut.png" />
+<img src="http://i.imgur.com/Fwe2Ucd.png" />
 
 
 ## Recomended Tools
   Nodemon [WIKI](https://www.npmjs.com/package/nodemon) <br />
   install ``` npm install -g nodemon  ```
 
-Author: David Kviloria <br />
-LICENSE: MIT
+<b>Author:</b> David Kviloria <br />
+<b>LICENSE:</b> MIT

@@ -11,10 +11,6 @@ let upper = x => x.toUpperCase()
 let exclime = x => x.concat('!')
 let undef
 
-let test = () => {
-  console.log("this is test miidleware");
-}
-
 /*
 * Custom miidleware
 */
@@ -25,7 +21,7 @@ const stringSizeParser = {
 };
 
 
-sut.applay(stringSizeParser)
+sut.upload(stringSizeParser)
 
 
 let TestStrategyOne = () => {
