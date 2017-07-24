@@ -1,42 +1,46 @@
-const { sut, def, assert } = require('../index');
+const {
+  sut,
+  def,
+  assert
+} = require('../index');
 
-let odd = x => (x % 2 == 0) ? true : false
-
-let countDonw = num => {
-  if(num === 0){ return }
-  countDonw(num-1);
-}
-
-let upper = x => x.toUpperCase()
-let exclime = x => x.concat('!')
-let undef
+let undef;
 
 /*
-* Custom miidleware
+* Define Halper Functions for your test
+* for access use: sut.helper.[name]
 */
-const stringSizeParser = {
-  size: (val) => {
-    return val.length
+sut.include({
+  size: x => x.length,
+  upper: x => x.toUpperCase(),
+  exclime: x => x.concat('!'),
+  odd: x => (x % 2 == 0) ? true : false,
+  countDonw: num => {
+    if(num === 0){ return }
+    countDonw(num-1);
   }
-};
+})
 
-
-sut.upload(stringSizeParser)
-
-
+/*
+ * Crate Test strategy for specific functions
+*/
 let TestStrategyOne = () => {
   def('Test One', () => {
     assert.equal(
-      sut.pipe(upper, exclime)('david'),
+      sut.pipe(sut.helper.upper, sut.helper.exclime)('david'),
       'DAVID!',
       'this should be DAVID!'
-    )
+    );
+    assert.arrayEqual([1, 3, 3], [1, 2, 3])
   })
 };
 
+/*
+ * Second strategy
+*/
 let TestStrategyTwo = () => {
   def('Test Two', () => {
-    assert.equal(odd(8), true, '5 is not odd')
+    assert.equal(sut.helper.odd(8), true, '5 is not odd')
     assert.ok(true, 'is should be ok')
   })
 };
@@ -47,8 +51,7 @@ let TestStrategyThree = () => {
   })
 };
 
-sut('This is test for App')
-(
+sut(
   TestStrategyOne,
   TestStrategyTwo,
   TestStrategyThree,

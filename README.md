@@ -1,70 +1,113 @@
-# Welcome to SUT
+# Welcome to SUTJS 1.9.1 (early alpha)
 
-SUT is Fast, minimalist TDD framework for node. <br /> <br />
-<img src="https://travis-ci.org/DatoKviloria/sut.svg?branch=master" />
+SUTJS is fast, TDD framework for nodejs.
 
-<br />
+![TravisCI](https://travis-ci.org/DatoKviloria/sut.svg?branch=master)
 
-## Install
-```
-npm install sut --save
-```
+## Install SUTJS
+
+> $ npm install sut --save-dev
+
+> $ yarn add sut
 
 [WIKI and API page for version: 1.6.2f](https://sutjs.github.io/docs/)
 
-## Usage && Code Example for v 2.0.0
+# Update Log
+
+- Supported for v 1.9.1
+  - :white_check_mark: sut
+    - @params: ... @type: [Function]
+  - sut.getStats
+    - @type: Function
+  - sut.pipe
+    - @type: Function
+    - @params: ... @type: [Function]
+  - :white_check_mark: sut.include (for declaring helper functions)
+    - @type: [Function]
+    - @params: [Helper @type: Object]
+    - @access: sut.helper.[methodname]    
+  - :white_check_mark: sut.upload (only for sut level helpers)
+    - @type: [Function]
+    - @params: [Module @type: Object]
+    - @access: sut.[modulename]
+  - :white_check_mark: def [Constructor Function]
+    - @type: [Function]
+    - @params: desc:String, callback:Function
+  - :white_check_mark: assert [Object]
+    - assert.equal @type: [Function]
+    - assert.notEqual @type: [Function]
+    - assert.strictEqual @type: [Function]
+    - assert.notStrictEqual @type: [Function]
+    - assert.above @type: [Function]
+    - assert.true @type: [Function]
+    - assert.notTrue @type: [Function]
+    - assert.false @type: [Function]
+    - assert.notFalse @type: [Function]
+    - assert.null @type: [Function]
+    - assert.notNull @type: [Function]
+    - assert.nan @type: [Function]
+    - assert.notNan @type: [Function]
+    - assert.undefined @type: [Function]
+    - assert.notUndefined @type: [Function]
+    - assert.arrayEqual @type: [Function]
+    - assert.arrayNotEqual @type: [Function]
+    - assert.typeEqual @type: [Function]
+    - assert.typeNotEqual @type: [Function]
+    - assert.fail @type: [Function]
+    - assert.ok @type: [Function]
+
+
+## Usage && Code Example for v 1.9.1
+
+> Migration to 2.0.0 !
+>
+> NodeJs Version: 7.x or Up
 
 ```javascript
 
-/*
-* New Update
-* Migration to 2.0.0
-*/
+const {
+  sut,
+  def,
+  assert
+} = require('../index');
 
-const { sut, def, assert } = require('sut');
-
-let odd = x => (x % 2 == 0) ? true : false
-
-let countDonw = num => {
-  if(num === 0){ return }
-  countDonw(num-1);
-}
-
-let upper = x => x.toUpperCase()
-let exclime = x => x.concat('!')
-let undef
+let undef;
 
 /*
-* Custom miidleware
+* Define Halper Functions for your test
+* for access use: sut.helper.[name]
 */
-const stringSizeParser = {
-  size: (val) => {
-    return val.length
+sut.include({
+  size: x => x.length,
+  upper: x => x.toUpperCase(),
+  exclime: x => x.concat('!'),
+  odd: x => (x % 2 == 0) ? true : false,
+  countDonw: num => {
+    if(num === 0){ return }
+    countDonw(num-1);
   }
-};
+})
 
 /*
-* apply Middleware
-*/
-sut.upload(stringSizeParser)
-
-
-/*
-* create strategy function
+ * Crate Test strategy for specific functions
 */
 let TestStrategyOne = () => {
   def('Test One', () => {
     assert.equal(
-      sut.pipe(upper, exclime)('david'),
+      sut.pipe(sut.helper.upper, sut.helper.exclime)('david'),
       'DAVID!',
       'this should be DAVID!'
-    )
+    );
+    assert.arrayEqual([1, 3, 3], [1, 2, 3])
   })
 };
 
+/*
+ * Second strategy
+*/
 let TestStrategyTwo = () => {
   def('Test Two', () => {
-    assert.equal(odd(8), true, '5 is not odd')
+    assert.equal(sut.helper.odd(8), true, '5 is not odd')
     assert.ok(true, 'is should be ok')
   })
 };
@@ -75,11 +118,7 @@ let TestStrategyThree = () => {
   })
 };
 
-/*
-* Run strategy group using sut
-*/
-sut('This is test for App')
-(
+sut(
   TestStrategyOne,
   TestStrategyTwo,
   TestStrategyThree,
@@ -88,12 +127,10 @@ sut('This is test for App')
 
 ```
 # Code Result
-<img src="http://i.imgur.com/Fwe2Ucd.png" />
+![Code Result](http://i.imgur.com/IIu0kPX.png)
 
+**Author**: David Kviloria @dkvilo
 
-## Recomended Tools
-  Nodemon [WIKI](https://www.npmjs.com/package/nodemon) <br />
-  install ``` npm install -g nodemon  ```
+[**List of contributors**](https://github.com/dkvilo/sut/community)
 
-<b>Author:</b> David Kviloria <br />
-<b>LICENSE:</b> MIT
+**LICENSE**: *MIT*
