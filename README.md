@@ -61,7 +61,7 @@ SUTJS is fast, TDD framework for nodejs.
 
 > Migration to 2.0.0 !
 >
-> NodeJs Version: 7.x or Up
+> NodeJs Version: 6.11.1 or Up
 
 ```javascript
 
