@@ -4,17 +4,17 @@ const {
   assert
 } = require('../index');
 
-require('./helpers')
+require('./helpers');
 
 let anotherCoolTest = () => {
   def('string test', () => {
     assert.equal(
-      sut.helper.exclime("a"), "a"
-    )
-  })
-}
+      sut.helper.exclime('a'), 'a'
+    );
+  });
+};
 
 sut(
   anotherCoolTest,
   sut.getStats
-)
+);

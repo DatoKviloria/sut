@@ -28,5 +28,8 @@
   "dependencies": {
     "convert-hrtime": "^2.0.0",
     "setprototypeof": "^1.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.2"
   }
 }

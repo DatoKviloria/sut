@@ -10,7 +10,7 @@ sut.include({
   exclime: x => x.concat('!'),
   odd: x => (x % 2 == 0) ? true : false,
   countDonw: num => {
-    if(num === 0){ return }
-    countDonw(num-1);
+    if(num === 0){ return; }
+    this(num-1);
   }
-})
+});

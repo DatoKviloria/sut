@@ -1,13 +1,29 @@
 const {
   sut,
-  def,
-  assert
-} = require('../index');
+  def
+} = require('../../index');
+
+const assert = require('../../lib/core/assert.sut');
+
+sut.use({
+  chai: require('chai').assert,
+  sut: assert,
+  node: require('assert')
+});
+
+/*
+ *********************************
+
+      npm install node-emoji
+
+ *********************************
+*/
+const emoji = require('node-emoji');
 
 /*
 * Custom Helpers
 */
-require('./helpers');
+require('../helpers');
 
 let undef;
 
@@ -41,7 +57,11 @@ let TestStrategyThree = () => {
   });
 };
 
-
+sut.template({
+  passed: emoji.get(':heart:'),
+  failed: emoji.get(':poop:'),
+  removeBackgroundColor: true
+});
 
 sut(
   TestStrategyOne,
