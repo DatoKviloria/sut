@@ -1,6 +1,6 @@
 {
   "name": "sut",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "Small TDD lib for node",
   "main": "./index",
   "scripts": {
@@ -28,5 +28,8 @@
   "dependencies": {
     "convert-hrtime": "^2.0.0",
     "setprototypeof": "^1.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.18.2"
   }
 }
