@@ -10,7 +10,7 @@
 
 ```
   SUT 2.0 (Neo) Doesn't support Assert Object any more.
-  But still acceptable with other assertion librarys such as Chai.assert, Node-assert, Sut-assert (SutJs Assert Object) etc ...
+  But still acceptable with other assertion libraries such as Chai.assert, Node-assert, Sut-assert (SutJs Assert Object) etc ...
 ```
 
 
