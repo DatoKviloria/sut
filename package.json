@@ -31,5 +31,8 @@
   },
   "devDependencies": {
     "eslint": "^4.18.2"
+  },
+  "devEngines": {
+    "node": "8.x || 9.x"
   }
 }
