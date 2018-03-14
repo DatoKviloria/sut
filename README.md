@@ -20,7 +20,7 @@
 | 2.0 NEO  | Custom Assert | Native  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut) |
 | 2.0 NEO  | Assert OBJ    | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-assert) |
 | 2.0 NEO  | Custom TPLS   | Native  | Complete    | ES6        | [LINK](https://www.github.com/dkvilo/sut) |
-| 2.0 NEO  | Emoji         | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-emoji-tpl) |
+| 2.0 NEO  | Emoji         | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-emoji) |
 | 2.0 NEO  | WEB Server    | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-web-server) |
 | 2.0 NEO  | WEB UI        | Plugin  | In Progress | ES6/7/JSX  | [LINK](https://www.github.com/dkvilo/sut/packages/sut-web-material-ui) |
 
