@@ -1,8 +1,6 @@
 # SUT@Neo Dev Day 1
 
-  > Don't use in production
-
-  > API Will be Changed soon
+  > Don't use in production, API will be changed soon
 
   > SUT Version: 2.0
 
@@ -12,7 +10,7 @@
 
 ```
   SUT 2.0 (Neo) Doesn't support Assert Object any more.
-  But still acceptable other assertion librarys such as Chai.assert, Node-assert, Sut-assert (SutJs Assert Object) ...
+  But still acceptable with other assertion librarys such as Chai.assert, Node-assert, Sut-assert (SutJs Assert Object) etc ...
 ```
 
 
