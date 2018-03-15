@@ -6,9 +6,13 @@
   "scripts": {
     "start": "node index.js"
   },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": {
     "type": "git",
-    "url": "github.com/DatoKviloria/sut"
+    "url": "github.com/dkvilo/sut"
   },
   "keywords": [
     "SUT",
