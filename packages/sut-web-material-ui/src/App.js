@@ -9,10 +9,10 @@ import Grid from 'material-ui/Grid';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ClearIcon from 'material-ui-icons/Clear';
 import CheckIcon from 'material-ui-icons/Check';
-import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
 import io from 'socket.io-client';
+
 
 const styles = theme => ({
   root: {
@@ -36,11 +36,10 @@ const styles = theme => ({
   },
   flex: {
     flex: 1,
-    padding: 10
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
+    marginRight: 20
   },
   textFieldInput: {
     borderRadius: 4,
@@ -49,11 +48,6 @@ const styles = theme => ({
     fontSize: 16,
     padding: '10px 12px',
     width: 'calc(100% - 24px)',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    '&:focus': {
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-    },
   }
 });
 
@@ -62,18 +56,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projectName: 'sut@neo web-ui',
+      projectName: 'neo ide',
       scaleSearchBox: false,
       wH: window.innerHeight,
-      query: ''
+      query: '',
+      data: [],
+      url: 'http://localhost:1960'
     }
   }
 
   componentWillMount() {
-    this.socket = io('http://localhost:1960');
-    this.socket.on('test', function (data) {
-      this.socket.emit('my other event', { my: 'data' });
-    });  
+    let self = this;
+    this.socket = io(this.state.url); 
+    this.socket.on('test', (data) => {
+      self.setState({data: data.body && JSON.parse(data.body)});
+    });
   }
 
   updateDimensions() {
@@ -96,109 +93,87 @@ class App extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <Grid container spacing={0}>
-      
-          <Grid item xs={12}>
-
-            <AppBar position='static'>
-              <Toolbar>
-                <Typography variant='title' color='inherit' className={classes.flex}>
-                  {this.state.projectName.toUpperCase()}
-                </Typography>
-                <TextField
-                  onFocus={() => this.setState({scaleSearchBox: true})}
-                  onBlur={() => this.setState({scaleSearchBox: false})}
-                  onChange={this.handleSearch.bind(this)}
-                  placeholder='Search ...'
-                  fullWidth={this.state.scaleSearchBox}
-                  InputProps={{
-                    disableUnderline: true,
-                    classes: {
-                      root: classes.textFieldRoot,
-                      input: classes.textFieldInput,
-                    },
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                    className: classes.textFieldFormLabel,
-                  }}
-                />
-              </Toolbar>
-            </AppBar>
-          
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <Paper className={classes.paper} style={{backgroundColor: '#00b894', minHeight: this.state.wH - 100, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
-              <Paper style={{textAlign: 'left', color: '#fff', backgroundColor: '#00b894'}} elevation={0}>
-                <h1>{`Passed Test(${4})`.toUpperCase()}</h1>              
-                <Divider />
-              </Paper>
-              {
-                [1,2,3,4,5,6,7,9,10,2,2,3,4,4,3,3,3,3,1,3,3,3,3]
-                  .filter((each) => String(each).includes(this.state.query))
-                  .map((data, index) => {
-                    return (
-                      <List component='nav' key={index}>
-                        <ListItem button style={{backgroundColor: '#55efc4'}}>
-                          <ListItemIcon style={{backgroundColor: 'green', padding: 5, color: '#fff', borderRadius: 100}}>
-                            <CheckIcon />
-                          </ListItemIcon>
-                          <ListItemText primary={`Name is David \tid: ${index}`} secondary={`Time: ${0.02410}`} />
-                        </ListItem>
-                      </List>
-                    );
-                  })
-              }
-            </Paper>
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <Paper className={classes.paper} style={{backgroundColor: '#e17055', minHeight: this.state.wH - 100, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
-              <Paper style={{textAlign: 'left', backgroundColor: '#e17055'}} elevation={0}>
-                <h1>{`Failed Test(${4})`.toUpperCase()}</h1>              
-                <Divider />
-              </Paper>              {
-                [1,2,3,4]
-                  .map((data, index) => {
-                    return (
-                      <List component='nav' key={index}>
-                        <ListItem button style={{backgroundColor: '#fab1a0'}}>
-                          <ListItemIcon style={{backgroundColor: 'red', padding: 5, color: '#fff', borderRadius: 100}}>
-                            <ClearIcon />
-                          </ListItemIcon>
-                          <ListItemText inset primary='Chelsea Otakan' />
-                        </ListItem>
-                      </List>
-                    );
-                  })
-              }
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6} sm={4}>
-            <Paper className={classes.paper} style={{backgroundColor: '#74b9ff', minHeight: this.state.wH - 100, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
-              <Paper style={{textAlign: 'left', backgroundColor: '#74b9ff'}} elevation={0}>
-                <h1>{`All Test(${8})`.toUpperCase()}</h1>              
-                <Divider />
-              </Paper>              {
-                [1,2,3,4]
-                  .map((data, index) => {
-                    return (
-                      <List component='nav' key={index}>
-                        <ListItem button style={{backgroundColor: '#fab1a0'}}>
-                          <ListItemIcon style={{backgroundColor: 'red', padding: 5, color: '#fff', borderRadius: 100}}>
-                            <ClearIcon />
-                          </ListItemIcon>
-                          <ListItemText inset primary='Chelsea Otakan' />
-                        </ListItem>
-                      </List>
-                    );
-                  })
-              }
-            </Paper>
-          </Grid>
+      <Grid container spacing={0}>
+        <Grid item xs={12}>
+          <AppBar style={{padding: 10}} color='default' position='static'>
+            <Toolbar>
+              <Typography variant='title' color='inherit' className={classes.flex}>
+                {this.state.projectName.toUpperCase()}
+              </Typography>
+              {/* <TextField
+                onFocus={() => this.setState({scaleSearchBox: true})}
+                onBlur={() => this.setState({scaleSearchBox: false})}
+                onChange={this.handleSearch.bind(this)}
+                placeholder='Search ...'
+                fullWidth={this.state.scaleSearchBox}
+                InputProps={{
+                  disableUnderline: true,
+                  classes: {
+                    root: classes.textFieldRoot,
+                    input: classes.textFieldInput,
+                  },
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                  className: classes.textFieldFormLabel,
+                }}
+              /> */}
+            </Toolbar>
+          </AppBar>
+        
         </Grid>
-      </div>
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper} style={{minHeight: this.state.wH - 120, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
+            <Paper style={{textAlign: 'center', padding: 10, color: '#555'}} elevation={1}>
+              <h1>{`Passed ${this.state.data.passed && this.state.data.passed.length || 0}`.toUpperCase()}</h1>              
+            </Paper>
+            {
+              (this.state.data.passed)
+                ?
+                this.state.data.passed
+                // .filter((each) => JSON.stringify(this.state.data.passed).includes(this.state.query))
+                .map((data, index) => {
+                  return (
+                    <List component='nav' key={index}>
+                      <ListItem divider>
+                        <ListItemIcon style={{backgroundColor: 'green', padding: 10, color: '#fff'}}>
+                          <CheckIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={`${(data.emoji) ? data.emoji : ''} ${data.test_description}`} secondary={`Time: ${data.time}`} />
+                      </ListItem>
+                    </List>
+                  );
+                })
+                : <Paper><h1>No passed test</h1></Paper>
+            }
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Paper className={classes.paper} style={{minHeight: this.state.wH - 120, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
+            <Paper style={{textAlign: 'center', padding: 10, color: '#555'}} elevation={1}>
+              <h1>{`Failed ${this.state.data.failed && this.state.data.failed.length || 0}`.toUpperCase()}</h1>              
+            </Paper>
+              { 
+                (this.state.data.failed) 
+                  ? 
+                  this.state.data.failed
+                  .map((data, index) => {
+                    return (
+                      <List component='nav' key={index}>
+                        <ListItem divider>
+                          <ListItemIcon style={{backgroundColor: 'red', padding: 10, color: '#fff'}}>
+                            <ClearIcon />
+                          </ListItemIcon>
+                          <ListItemText primary={`${(data.emoji) ? data.emoji : ''} ${data.test_description}`} secondary={`Time: ${data.time}`} />
+                        </ListItem>
+                      </List>
+                    );
+                  })
+                : <Paper><h1>No failed test</h1></Paper>
+            }
+          </Paper>
+        </Grid>
+      </Grid>
     );
   }
 
