@@ -11,18 +11,9 @@ sut.use({
   node: require('assert')
 });
 
-/*
- *********************************
-
-      npm install node-emoji
-
- *********************************
-*/
 const emoji = require('node-emoji');
 
-/*
-* Custom Helpers
-*/
+// load helpers
 require('../helpers');
 
 let undef;
@@ -33,11 +24,11 @@ let undef;
 let TestStrategyOne = () => {
   def('Test One', () => {
     assert.equal(
-      sut.pipe(sut.helper.upper, sut.helper.exclime)('david'),
+      sut.pipe(sut.helper.string.upper, sut.helper.string.exclime)('david'),
       'DAVID!',
-      'this should be DAVID!'
+      'ცვლადი name უნდა იყოს DAVID!'
     );
-    assert.arrayEqual([1, 3, 3], [1, 2, 3]);
+    assert.arrayEqual([1, 3, 3], [1, 2, 3], 'მასივი [1, 3, 3] თანასწორია [1, 2, 3] - ის');
   });
 };
 
@@ -46,26 +37,37 @@ let TestStrategyOne = () => {
 */
 let TestStrategyTwo = () => {
   def('Test Two', () => {
-    assert.equal(sut.helper.odd(8), true, '5 is not odd');
-    assert.ok(true, 'is should be ok');
+    assert.equal(sut.helper.math.odd(8), true, '8 არის ლუწი');
+    assert.equal(true, true, 'ცვლადი a ცვლადი b-ს თანასწრია');
   });
 };
 
 let TestStrategyThree = () => {
   def('Test Three', () => {
-    assert.undefined(undef, 'this will be ok');
+    assert.undefined(undef, 'ცვლადის მნიშვნელოაბა არის undefined');
+    assert.arrayEqual([1,2,4,7,5], [1,2,4,7,6], 'მასივი [1,2,4,7,5] თანასწორია მასივი [1,2,4,7,5] - ის');
   });
 };
 
 sut.template({
   passed: emoji.get(':heart:'),
   failed: emoji.get(':poop:'),
-  removeBackgroundColor: true
+  removeColor: false
 });
 
-sut(
-  TestStrategyOne,
-  TestStrategyTwo,
-  TestStrategyThree,
-  sut.getStats
-);
+sut(TestStrategyOne, TestStrategyTwo, TestStrategyThree, sut.stats);
+
+
+// sut.web({});
+
+const http = require('http')
+  .Server((req, res) => {
+    res.writeHead(200);
+    res.end('hello, world');
+  }).listen(1960, () => console.log('Server runs ...'));
+  
+const io = require('socket.io')(http);
+
+io.on('connection', (socket) => {
+  socket.emit('test', { body: JSON.stringify(sut.store && sut.store.all || {data: null}) });
+});
