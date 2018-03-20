@@ -57,23 +57,14 @@ sut.template({
 
 sut(TestStrategyOne, TestStrategyTwo, TestStrategyThree, sut.stats);
 
-
 const options = {
-  terminal: false,
   server: {
     port: 1961,
     message: true,
     data: sut.store.all
   },
   client: {
-    template: {
-      mode: 'dark'
-    },
-    chat: true,
-    security: {
-      password: 'myserver123',
-      encrypt_data: true
-    }
+    chat: true
   }
 };
 
