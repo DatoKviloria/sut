@@ -58,16 +58,23 @@ sut.template({
 sut(TestStrategyOne, TestStrategyTwo, TestStrategyThree, sut.stats);
 
 
-// sut.web({});
+const options = {
+  terminal: false,
+  server: {
+    port: 1961,
+    message: true,
+    data: sut.store.all
+  },
+  client: {
+    template: {
+      mode: 'dark'
+    },
+    chat: true,
+    security: {
+      password: 'myserver123',
+      encrypt_data: true
+    }
+  }
+};
 
-const http = require('http')
-  .Server((req, res) => {
-    res.writeHead(200);
-    res.end('hello, world');
-  }).listen(1960, () => console.log('Server runs ...'));
-  
-const io = require('socket.io')(http);
-
-io.on('connection', (socket) => {
-  socket.emit('test', { body: JSON.stringify(sut.store && sut.store.all || {data: null}) });
-});
+sut.connect(options);
