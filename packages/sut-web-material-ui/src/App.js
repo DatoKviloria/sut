@@ -9,7 +9,19 @@ import Grid from 'material-ui/Grid';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import ClearIcon from 'material-ui-icons/Clear';
 import CheckIcon from 'material-ui-icons/Check';
+import SettingsIcon from 'material-ui-icons/Settings';
+import ChatIcon from 'material-ui-icons/Chat';
 import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import Drawer from 'material-ui/Drawer';
+
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 import io from 'socket.io-client';
 
@@ -48,8 +60,33 @@ const styles = theme => ({
     fontSize: 16,
     padding: '10px 12px',
     width: 'calc(100% - 24px)',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 150,
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  message_input: {
+    border: 'none'
   }
 });
+
+
+const Protocol = [
+  {
+    value: 'http://',
+    label: 'HTTP'
+  },
+  {
+    value: 'https://',
+    label: 'HTTPS'
+  }
+];
+
 
 class App extends React.Component {
   
@@ -61,16 +98,26 @@ class App extends React.Component {
       wH: window.innerHeight,
       query: '',
       data: [],
-      url: 'http://localhost:1960'
+      dialogIsOpen: false,
+      hostname: localStorage.getItem('hostname') || null,
+      port: localStorage.getItem('port') || null,
+      protocol: localStorage.getItem('protocol') || null,
+      error: false,
+      info: '',
+      chat: false,
+      message: ''
     }
+
+    this.toggleChat = this.toggleChat.bind(this);
+    this.onMessageSubmit = this.onMessageSubmit.bind(this);
+    this.messages = [];
   }
 
+
   componentWillMount() {
-    let self = this;
-    this.socket = io(this.state.url); 
-    this.socket.on('test', (data) => {
-      self.setState({data: data.body && JSON.parse(data.body)});
-    });
+    if (localStorage.getItem('protocol') && localStorage.getItem('port') && localStorage.getItem('hostname')) {
+      this.connectSocket();
+    }
   }
 
   updateDimensions() {
@@ -86,12 +133,93 @@ class App extends React.Component {
     window.removeEventListener('resize', this.updateDimensions.bind(this));
   }
 
+  componentDidCatch(error, info) {
+    this.setState({ error: true, info });
+  }
+
   handleSearch(e) {
     this.setState({query: e.target.value});
   }
 
+  handleClickOpen() {
+    this.setState({ dialogIsOpen: true });
+  }
+
+  handleClose() {
+    this.setState({ dialogIsOpen: false });
+  }
+
+  handleProtocol(e) {
+    this.setState({
+      protocol: e.target.value,
+    });
+  }
+
+  handlePort(e) {
+    this.setState({
+      port: e.target.value,
+    });
+  }
+
+  handleHostname(e) {
+    this.setState({
+      hostname: e.target.value,
+    });
+  }
+
+  toggleChat(open) {
+    this.setState({chat: open});
+  }
+
+  handleMessage(e) {
+    this.setState({message: e.target.value}, () => {
+      // user is typing
+      this.socket.emit('typing', {
+        name: 'kvilo'
+      });
+    });
+  }
+
+  connectSocket() {
+
+    let self = this;
+
+    this.socket = io(`${this.state.protocol}${this.state.hostname}:${this.state.port}`);
+    
+    this.socket.on('test', (data) => {
+      self.setState({data: data.body && JSON.parse(data.body)});
+      localStorage.setItem('protocol', this.state.protocol);
+      localStorage.setItem('port', this.state.port);
+      localStorage.setItem('hostname', this.state.hostname);
+    });
+
+    this.socket.on('typing', (data) => {
+      console.log('User is typing');
+    })
+
+    this.socket.on('message', (data) => {
+      this.messages.push(data);
+    });
+
+  }
+
+  handleUpdate() {
+    this.forceUpdate();
+  }
+
+  onMessageSubmit(e) {
+    e.preventDefault();    
+    if (this.state.message.length >= 1) {
+      this.handleUpdate();
+      this.socket.emit('message', {
+        text: this.state.message,
+        name: 'kvilo'
+      });
+    }
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, fullScreen } = this.props;
     return (
       <Grid container spacing={0}>
         <Grid item xs={12}>
@@ -118,9 +246,14 @@ class App extends React.Component {
                   className: classes.textFieldFormLabel,
                 }}
               /> */}
+              <Button onClick={() => this.toggleChat(true)}>
+                <ChatIcon />
+              </Button>
+              <Button onClick={this.handleClickOpen.bind(this)}>
+                <SettingsIcon />
+              </Button>
             </Toolbar>
           </AppBar>
-        
         </Grid>
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper} style={{minHeight: this.state.wH - 120, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
@@ -131,11 +264,10 @@ class App extends React.Component {
               (this.state.data.passed)
                 ?
                 this.state.data.passed
-                // .filter((each) => JSON.stringify(this.state.data.passed).includes(this.state.query))
                 .map((data, index) => {
                   return (
                     <List component='nav' key={index}>
-                      <ListItem divider>
+                      <ListItem button divider>
                         <ListItemIcon style={{backgroundColor: 'green', padding: 10, color: '#fff'}}>
                           <CheckIcon />
                         </ListItemIcon>
@@ -144,7 +276,7 @@ class App extends React.Component {
                     </List>
                   );
                 })
-                : <Paper><h1>No passed test</h1></Paper>
+                : <Paper style={{padding: 10}}><h1>No data available</h1></Paper>
             }
           </Paper>
         </Grid>
@@ -160,7 +292,7 @@ class App extends React.Component {
                   .map((data, index) => {
                     return (
                       <List component='nav' key={index}>
-                        <ListItem divider>
+                        <ListItem button divider>
                           <ListItemIcon style={{backgroundColor: 'red', padding: 10, color: '#fff'}}>
                             <ClearIcon />
                           </ListItemIcon>
@@ -169,10 +301,123 @@ class App extends React.Component {
                       </List>
                     );
                   })
-                : <Paper><h1>No failed test</h1></Paper>
+                : <Paper style={{padding: 10}}><h1>No data available</h1></Paper>
             }
           </Paper>
         </Grid>
+
+        <Dialog
+          fullScreen={fullScreen}
+          open={this.state.dialogIsOpen}
+          onClose={this.handleClose.bind(this)}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">{"Connection Settings"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <form onSubmit={this.connectSocket.bind(this)} className={classes.container} noValidate autoComplete="off">
+
+                <TextField
+                  required
+                  select
+                  label="Protocol"
+                  className={classes.textField}
+                  value={this.state.protocol}
+                  onChange={this.handleProtocol.bind(this)}
+                  SelectProps={{
+                    MenuProps: {
+                      className: classes.menu,
+                    },
+                  }}
+                  margin="normal"
+                >
+                  {Protocol.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
+                  required
+                  label="Hostname"
+                  onChange={this.handleHostname.bind(this)}
+                  defaultValue={this.state.hostname}
+                  className={classes.textField}
+                  margin="normal"
+                />
+
+                <TextField
+                  required
+                  label="Port"
+                  onChange={this.handlePort.bind(this)}
+                  defaultValue={this.state.port}
+                  className={classes.textField}
+                  margin="normal"
+                  />
+
+              </form>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose.bind(this)} color="secondary">
+              Cancel
+            </Button>
+            <Button onClick={this.connectSocket.bind(this)} color="primary" autoFocus>
+              Connect
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+
+        <Drawer
+          anchor="bottom"
+          open={this.state.chat}
+          onClose={() => this.toggleChat(false)}
+        >
+          <div
+            tabIndex={0}
+            role="button"
+          >
+           <Paper style={{
+             padding: 20,
+             minHeight: 500,
+             maxHeight: 500,             
+             overflowY: 'scroll'
+           }}>
+           
+           { 
+            (this.messages) 
+              ? 
+              this.messages
+              .map((data, index) => {
+                return (
+                  <List component='nav' key={index}>
+                    <ListItem button divider>
+                      <ListItemIcon style={{backgroundColor: 'blue', padding: 10, color: '#fff'}}>
+                        <ChatIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={`${data.message.text}`} secondary={`${data.message.name}`} />
+                    </ListItem>
+                  </List>
+                );
+              })
+              : <Paper style={{padding: 10}}><h1>No data available</h1></Paper>
+            }
+           
+           </Paper>
+          </div>
+          <form onSubmit={this.onMessageSubmit} style={{padding: 10}}>
+            <TextField
+              fullWidth
+              onChange={this.handleMessage.bind(this)}
+              className={classes.message_input}
+              placeholder='Write message ...'
+              margin="normal"
+            />
+          </form>
+        </Drawer>
+
       </Grid>
     );
   }
