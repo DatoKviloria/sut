@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Poiret+One');
+/* font-family: 'Poiret One', cursive; */
+
+
+.header {
+    margin-bottom: 1.45rem;
+    background-color: rgba(252, 92, 101, 0.7);
+    text-align: center;
+}
+
+.logo {
+    /* color: rgba(136, 84, 208,1.0); */
+    color: whitesmoke;
+    text-decoration: none;
+    font-family: 'Audiowide', cursive;
+}
+
+
+.logo-wrapper {
+    margin: 0;
+}
