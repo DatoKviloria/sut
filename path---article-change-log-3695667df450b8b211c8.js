@@ -1,0 +1,2 @@
+webpackJsonp([0x92147b512c62],{327:function(a,t){a.exports={data:{markdownRemark:{html:"",frontmatter:{date:"March 22, 2018",path:"/article/change-log",title:"Change Log SUT 2.0 Neo",author:"Daivd Kviloria"}}},pathContext:{}}}});
+//# sourceMappingURL=path---article-change-log-3695667df450b8b211c8.js.map
