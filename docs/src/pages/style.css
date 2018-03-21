@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Poiret+One');
+
+.card {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 1.45rem 1.0875rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment {
+ 
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    padding: 1.45rem 1.0875rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-full {
+    margin: 0 auto;
+    /* max-width: 1000px; */
+    padding: 1.45rem 1.0875rem;
+    background: rgba(252, 92, 101, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button {
+    text-decoration: none;
+    padding: 10px;
+    background: palevioletred;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.button:hover {
+    box-shadow: 0px 3px #555;
+    transition: 0.2s;
+}
+
+.desc {
+    max-width: 700px;
+    text-align: center;
+    color: #222;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: 'Poiret One', cursive;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.button-group {
+    display: flex;
+}
+
+
+.flex-col {
+    flex: 1;
+    align-items: center;
+    text-align: center;
+    /* justify-content: center; */
+}
+
+.image-a {
+    box-shadow: 10px 10px 15px -5px #555; 
+}
