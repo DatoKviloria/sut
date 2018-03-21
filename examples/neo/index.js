@@ -14,7 +14,7 @@ sut.use({
 const emoji = require('node-emoji');
 
 // load helpers
-require('../helpers');
+require('./helpers');
 
 let undef;
 
@@ -22,13 +22,13 @@ let undef;
  * Crate Test strategy for specific functions
 */
 let TestStrategyOne = () => {
-  def('Test One', () => {
-    assert.equal(
+  def('Test One',  async () => {
+    await assert.equal(
       sut.pipe(sut.helper.string.upper, sut.helper.string.exclime)('david'),
       'DAVID!',
-      'ცვლადი name უნდა იყოს DAVID!'
+      'Variable name is equal to DAVID!'
     );
-    assert.arrayEqual([1, 3, 3], [1, 2, 3], 'მასივი [1, 3, 3] თანასწორია [1, 2, 3] - ის');
+    await assert.arrayEqual([1, 3, 3], [1, 2, 3], 'Array [1, 3, 3] is equal to Array [1, 2, 3]');
   });
 };
 
@@ -38,16 +38,24 @@ let TestStrategyOne = () => {
 let TestStrategyTwo = () => {
   def('Test Two', () => {
     assert.equal(sut.helper.math.odd(8), true, '8 არის ლუწი');
-    assert.equal(true, true, 'ცვლადი a ცვლადი b-ს თანასწრია');
+    assert.equal(true, true, 'Variable a is equal to Variable b');
   });
 };
 
 let TestStrategyThree = () => {
   def('Test Three', () => {
-    assert.undefined(undef, 'ცვლადის მნიშვნელოაბა არის undefined');
-    assert.arrayEqual([1,2,4,7,5], [1,2,4,7,6], 'მასივი [1,2,4,7,5] თანასწორია მასივი [1,2,4,7,5] - ის');
+    assert.undefined(undef, 'Variable is undefined');
+    assert.arrayEqual([1,2,4,7,5], [1,2,4,7,6], 'Array [1,2,4,7,5] is equal to Array [1,2,4,7,5]');
   });
 };
+
+
+let TestAPIStrategy = () => {
+  def ('API TEST', async () => {
+    assert.equal(await sut.helper.api.response().then(user => user.id), 1, 'API Works correctly');
+  });
+};
+
 
 sut.template({
   passed: emoji.get(':heart:'),
@@ -55,12 +63,16 @@ sut.template({
   removeColor: false
 });
 
-sut(TestStrategyOne, TestStrategyTwo, TestStrategyThree, sut.stats);
+sut(
+  TestStrategyOne,
+  TestStrategyTwo,
+  TestStrategyThree,
+  TestAPIStrategy,
+);
 
 const options = {
   server: {
     port: 1961,
-    message: true,
     data: sut.store.all
   },
   client: {
