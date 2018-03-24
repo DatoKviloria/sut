@@ -11,6 +11,8 @@ sut.use({
   node: require('assert')
 });
 
+process.env.sut_build = false;
+
 const emoji = require('node-emoji');
 
 // load helpers
@@ -29,6 +31,7 @@ let TestStrategyOne = () => {
       'Variable name is equal to DAVID!'
     );
     await assert.arrayEqual([1, 3, 3], [1, 2, 3], 'Array [1, 3, 3] is equal to Array [1, 2, 3]');
+    await assert.arrayEqual([1, 3, 3], [1, 2, 3], 'Array [1, 3, 3] is equal to Array [1, 2, 3]');
   });
 };
 
@@ -37,7 +40,7 @@ let TestStrategyOne = () => {
 */
 let TestStrategyTwo = () => {
   def('Test Two', () => {
-    assert.equal(sut.helper.math.odd(8), true, '8 არის ლუწი');
+    assert.equal(sut.helper.math.odd(8), true, '8 is odd');
     assert.equal(true, true, 'Variable a is equal to Variable b');
   });
 };
@@ -45,17 +48,16 @@ let TestStrategyTwo = () => {
 let TestStrategyThree = () => {
   def('Test Three', () => {
     assert.undefined(undef, 'Variable is undefined');
-    assert.arrayEqual([1,2,4,7,5], [1,2,4,7,6], 'Array [1,2,4,7,5] is equal to Array [1,2,4,7,5]');
+    assert.arrayEqual([1,2,4,7,40], [1,2,4,7,6], 'Array [1,2,4,7,5] is equal to Array [1,2,4,7,5]');
   });
 };
-
 
 let TestAPIStrategy = () => {
   def ('API TEST', async () => {
     assert.equal(await sut.helper.api.response().then(user => user.id), 1, 'API Works correctly');
   });
 };
-
+// this is cool
 
 sut.template({
   passed: emoji.get(':heart:'),
@@ -74,9 +76,6 @@ const options = {
   server: {
     port: 1961,
     data: sut.store.all
-  },
-  client: {
-    chat: true
   }
 };
 

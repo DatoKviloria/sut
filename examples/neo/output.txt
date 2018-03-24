@@ -1,0 +1,17 @@
+
+From: Test One
+--------------------------------------------------------------
+[42m ❤️  [40m [37m 	Time: 0.022427 ms 	Description:	 Variable name is equal to DAVID! [40m [37m
+
+From: Test Two
+--------------------------------------------------------------
+[42m ❤️  [40m [37m 	Time: 0.005739 ms 	Description:	 8 is odd [40m [37m
+[42m ❤️  [40m [37m 	Time: 0.001749 ms 	Description:	 Variable a is equal to Variable b [40m [37m
+
+From: Test Three
+--------------------------------------------------------------
+[42m ❤️  [40m [37m 	Time: 0.001997 ms 	Description:	 Variable is undefined [40m [37m
+[41m 💩  [40m [37m 	Time: 0.002025 ms 	Description:	 Array [1,2,4,7,5] is equal to Array [1,2,4,7,5] [40m [37m
+
+From: API TEST
+--------------------------------------------------------------

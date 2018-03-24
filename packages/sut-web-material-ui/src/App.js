@@ -89,7 +89,7 @@ const Protocol = [
 
 
 class App extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -185,8 +185,9 @@ class App extends React.Component {
     let self = this;
 
     this.socket = io(`${this.state.protocol}${this.state.hostname}:${this.state.port}`);
-    
+
     this.socket.on('test', (data) => {
+      console.log(JSON.parse(data.body));
       self.setState({data: data.body && JSON.parse(data.body)});
       localStorage.setItem('protocol', this.state.protocol);
       localStorage.setItem('port', this.state.port);
@@ -208,7 +209,7 @@ class App extends React.Component {
   }
 
   onMessageSubmit(e) {
-    e.preventDefault();    
+    e.preventDefault();
     if (this.state.message.length >= 1) {
       this.handleUpdate();
       this.socket.emit('message', {
@@ -258,7 +259,7 @@ class App extends React.Component {
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper} style={{minHeight: this.state.wH - 120, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
             <Paper style={{textAlign: 'center', padding: 10, color: '#555'}} elevation={1}>
-              <h1>{`Passed ${this.state.data.passed && this.state.data.passed.length || 0}`.toUpperCase()}</h1>              
+              <h1>{`Passed ${this.state.data.passed && this.state.data.passed.length || 0}`.toUpperCase()}</h1>
             </Paper>
             {
               (this.state.data.passed)
@@ -283,11 +284,11 @@ class App extends React.Component {
         <Grid item xs={12} sm={6}>
           <Paper className={classes.paper} style={{minHeight: this.state.wH - 120, maxHeight: this.state.wH - 100, overflowY: 'scroll'}}>
             <Paper style={{textAlign: 'center', padding: 10, color: '#555'}} elevation={1}>
-              <h1>{`Failed ${this.state.data.failed && this.state.data.failed.length || 0}`.toUpperCase()}</h1>              
+              <h1>{`Failed ${this.state.data.failed && this.state.data.failed.length || 0}`.toUpperCase()}</h1>
             </Paper>
-              { 
-                (this.state.data.failed) 
-                  ? 
+              {
+                (this.state.data.failed)
+                  ?
                   this.state.data.failed
                   .map((data, index) => {
                     return (
@@ -382,13 +383,13 @@ class App extends React.Component {
            <Paper style={{
              padding: 20,
              minHeight: 500,
-             maxHeight: 500,             
+             maxHeight: 500,
              overflowY: 'scroll'
            }}>
-           
-           { 
-            (this.messages) 
-              ? 
+
+           {
+            (this.messages)
+              ?
               this.messages
               .map((data, index) => {
                 return (
@@ -404,7 +405,7 @@ class App extends React.Component {
               })
               : <Paper style={{padding: 10}}><h1>No data available</h1></Paper>
             }
-           
+
            </Paper>
           </div>
           <form onSubmit={this.onMessageSubmit} style={{padding: 10}}>
