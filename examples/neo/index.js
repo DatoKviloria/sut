@@ -11,7 +11,6 @@ sut.use({
   node: require('assert')
 });
 
-process.env.sut_build = false;
 
 const emoji = require('node-emoji');
 
@@ -57,7 +56,6 @@ let TestAPIStrategy = () => {
     assert.equal(await sut.helper.api.response().then(user => user.id), 1, 'API Works correctly');
   });
 };
-// this is cool
 
 sut.template({
   passed: emoji.get(':heart:'),
@@ -68,8 +66,6 @@ sut.template({
 sut(
   TestStrategyOne,
   TestStrategyTwo,
-  TestStrategyThree,
-  TestAPIStrategy,
 );
 
 const options = {
@@ -78,5 +74,9 @@ const options = {
     data: sut.store.all
   }
 };
+
+sut.createHistory({
+  build: true
+});
 
 sut.connect(options);
