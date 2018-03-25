@@ -11,6 +11,7 @@ sut.use({
   node: require('assert')
 });
 
+
 const emoji = require('node-emoji');
 
 // load helpers
@@ -65,8 +66,6 @@ sut.template({
 sut(
   TestStrategyOne,
   TestStrategyTwo,
-  TestStrategyThree,
-  TestAPIStrategy,
 );
 
 const options = {
@@ -75,5 +74,9 @@ const options = {
     data: sut.store.all
   }
 };
+
+sut.createHistory({
+  build: true
+});
 
 sut.connect(options);
