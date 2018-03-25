@@ -15,6 +15,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
 
 import Dialog, {
   DialogActions,
@@ -269,11 +270,15 @@ class App extends React.Component {
                   return (
                     <List component='nav' key={index}>
                       <ListItem button divider>
-                        <ListItemIcon style={{backgroundColor: 'green', padding: 10, color: '#fff'}}>
+                        <ListItemIcon style={{backgroundColor: '#2ecc71', padding: 10, color: '#fff'}}>
                           <CheckIcon />
                         </ListItemIcon>
                         <ListItemText primary={`${(data.emoji) ? data.emoji : ''} ${data.test_description}`} secondary={`Time: ${data.time}`} />
-                      </ListItem>
+                        <div style={{display: 'flex', flexDirection: 'column', flexBasis: 30+'%', textAlign: 'center', color: '#fff'}}>
+                          <Paper elevation={0} style={{marginBottom: 4, felx: 1, padding: 10, backgroundColor: '#2ecc71'}}><b>{typeof data.diff.explanation}</b> {new String(data.diff.explanation)}</Paper>
+                          <Paper elevation={0} style={{padding: 10, backgroundColor: '#2ecc71'}}><b>{typeof data.diff.expected}</b> {new String(data.diff.expected)}</Paper>
+                        </div>
+                    </ListItem>
                     </List>
                   );
                 })
@@ -294,10 +299,14 @@ class App extends React.Component {
                     return (
                       <List component='nav' key={index}>
                         <ListItem button divider>
-                          <ListItemIcon style={{backgroundColor: 'red', padding: 10, color: '#fff'}}>
+                          <ListItemIcon style={{backgroundColor: '#e74c3c', padding: 10, color: '#fff'}}>
                             <ClearIcon />
                           </ListItemIcon>
                           <ListItemText primary={`${(data.emoji) ? data.emoji : ''} ${data.test_description}`} secondary={`Time: ${data.time}`} />
+                          <div style={{display: 'flex', flexDirection: 'column', flexBasis: 30+'%', textAlign: 'center', color: '#fff'}}>
+                            <Paper elevation={0} style={{marginBottom: 4, felx: 1, padding: 10, backgroundColor: '#2ecc71'}}><b>{typeof data.diff.explanation}</b> {new String(data.diff.explanation)}</Paper>
+                            <Paper elevation={0} style={{padding: 10, backgroundColor: '#e74c3c'}}><b>{typeof data.diff.expected}</b> {new String(data.diff.expected)}</Paper>
+                          </div>
                         </ListItem>
                       </List>
                     );
@@ -399,7 +408,7 @@ class App extends React.Component {
                         <ChatIcon />
                       </ListItemIcon>
                       <ListItemText primary={`${data.message.text}`} secondary={`${data.message.name}`} />
-                    </ListItem>
+                  </ListItem>
                   </List>
                 );
               })
