@@ -66,6 +66,8 @@ sut.template({
 sut(
   TestStrategyOne,
   TestStrategyTwo,
+  TestStrategyThree,
+  TestAPIStrategy
 );
 
 const options = {
@@ -76,7 +78,7 @@ const options = {
 };
 
 sut.createHistory({
-  build: true
+  build: false
 });
 
 sut.connect(options);
