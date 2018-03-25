@@ -1,0 +1,57 @@
+@import 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css';
+
+.post-item {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(252, 92, 101, 0.3);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.post-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-wrapper {
+    display: flex;
+    flex: 0.15;    
+}
+
+.link-wrapper {
+    padding: 10px;
+    flex: 2;
+    text-align: center;
+}
+
+.post-item:hover {
+    box-shadow: 0px 0px 5px rgba(252, 92, 101,1.0);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.post-item .icon {
+    font-size: 50px;
+    padding: 10px;
+}
+
+.post-item a {
+    text-decoration: none;
+    color: rgba(136, 84, 208,1.0);
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: monospace;
+}
+
+.info {
+    text-align: center;
+    border-top: 1px solid rgba(136, 84, 208,1.0);
+    padding: 10px;
+}
+.post-item span {
+    color: rgba(136, 84, 208,1.0);
+    font-family: monospace;
+    text-transform: uppercase;
+    font-size: 15px;
+}
