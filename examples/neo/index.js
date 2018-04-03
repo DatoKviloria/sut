@@ -1,9 +1,8 @@
 const {
   sut,
-  def
+  def,
+  assert
 } = require('../../index');
-
-const assert = require('../../lib/core/assert.sut');
 
 sut.use({
   chai: require('chai').assert,

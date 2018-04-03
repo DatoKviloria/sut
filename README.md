@@ -1,4 +1,4 @@
-# SUT@Neo 1.9.9-rc
+# SUT@Neo 2.0 LTS
 
   > SUT Version: 2.0
 
