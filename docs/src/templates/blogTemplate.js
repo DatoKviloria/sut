@@ -1,15 +1,17 @@
 import React from "react";
 import Link from "gatsby-link";
+require("prismjs/themes/prism-solarizedlight.css");
+require("./index.css");
 
 export default function Template({
   data,
 }) {
-  
+
   let disqus_config = function () {
-    this.page.url = frontmatter.path;  
+    this.page.url = frontmatter.path;
     this.page.identifier = frontmatter.title;
   };
-  
+
   if(typeof window !== 'undefined') {
     let d = document;
     let s = d.createElement('script');
@@ -20,10 +22,10 @@ export default function Template({
 
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
-  
+
   return (
     <div className='wrapper'>
-    <div className="card">  
+    <div className="card">
       <div className="blog-post">
         <h1>{frontmatter.title}</h1>
         <span style={{
@@ -35,11 +37,11 @@ export default function Template({
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
-      <Link className='button' style={{position: 'relative'}} to="/docs/">Go Back</Link>     
+      <Link className='button' style={{position: 'relative'}} to="/docs/">Go Back</Link>
     </div>
       <div className='comment' id="disqus_thread"></div>
     </div>
-  );                      
+  );
 }
 
 export const pageQuery = graphql`
