@@ -1,28 +1,26 @@
-# SUT@Neo Dev Day 1
-
-  > Don't use in production, API will be changed soon
+# SUT@Neo 1.9.9-rc
 
   > SUT Version: 2.0
 
   > CodeBase Name: Neo
 
-# Changelog
+  * ``LTS SUT: npm install --save-dev sut@neo (not published)``
 
-```
-  SUT 2.0 (Neo) Doesn't support Assert Object any more.
-  But still acceptable with other assertion libraries such as Chai.assert, Node-assert, Sut-assert (SutJs Assert Object) etc ...
-```
+  * ``LTS Assert: npm install --save-dev sut@assert (not published)``
 
-
-| Version  | Module        | Support | Status      | ES Support | Repo |
-|----------|:-------------:|:-------:|------------:|-----------:|-----:|
-| 2.0 NEO  | Custom Helper | Native  | Complete    | ES6        | [LINK](https://www.google.com/dkvilo/sut) |
-| 2.0 NEO  | Custom Assert | Native  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut) |
-| 2.0 NEO  | Assert OBJ    | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-assert) |
-| 2.0 NEO  | Custom TPLS   | Native  | Complete    | ES6        | [LINK](https://www.github.com/dkvilo/sut) |
-| 2.0 NEO  | Emoji         | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-emoji) |
-| 2.0 NEO  | WEB Server    | Plugin  | In Progress | ES6        | [LINK](https://www.github.com/dkvilo/sut/packages/sut-web-server) |
-| 2.0 NEO  | WEB UI        | Plugin  | In Progress | ES6/7/JSX  | [LINK](https://www.github.com/dkvilo/sut/packages/sut-web-material-ui) |
+# [Documentation](https://dkvilo.github.io/sut/article/getting-started)
+# [Changelog](https://dkvilo.github.io/sut/article/change-log)
 
 
+# Contributing
 
+* [Fork](https://github.com/dkvilo/sut/fork) Project
+* Create your feature branch (git checkout -b feature/foo)
+* Add to branch (git add .)
+* Commit your changes (git commit -m 'Add foo')
+* Push to the branch (git push origin feature/foo)
+* Create a new Pull Request
+
+
+# Original Author
+> David Kviloria @dkvilo
