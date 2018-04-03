@@ -9,9 +9,9 @@ author: "Daivd Kviloria"
 ```
     # Install sut test runner    
     $ npm install --save-dev sut@neo
+    # or just
+    $ npm install --save-dev sut
 
-    # Install Sut Assert library
-    $ npm install --save-dev sut@assert
 ```
 
 ## Simple Strategy Based Test Example
@@ -19,16 +19,13 @@ File: <b>app.test.js</b>
 
 ```javascript
 // import SUTJS LTS
-const { sut, def } = require('sut@neo');
-
-// import SUT Assert Library
-const assert = require('sut@assert');
+const { sut, def, assert } = require('sut@neo');
 
 // Create Test Strategy/Gtto
 const exampleTestStrategy = () =>
     def('Example Testing ...', () =>
-        Assert.equal(1, 1, 'this test must passed')
-        Assert.okay(false, 'this test must failed')        
+        assert.equal(1, 1, 'this test must passed')
+        assert.okay(false, 'this test must failed')        
     )
 
 // Call main sut container to run tests
@@ -44,10 +41,7 @@ File: <b>async.test.js</b>
 
 ```javascript
 // import SUTJS LTS
-const { sut, def } = require('sut@neo');
-
-// import SUT Assert Library
-const assert = require('sut@assert');
+const { sut, def, assert } = require('sut@neo');
 
 // install node-fetch
 // npm install node-fetch
@@ -65,7 +59,7 @@ sut.include({
 const testStrategyForAPI = () =>
     // Make CB function async
     def('USER EP Testing ...', async () =>
-        Assert.equal(
+        assert.equal(
             // Access to sut custom helper
             await sut.helper.api.response('https://jsonplaceholder.typicode.com/posts/1')
                 .then((data) => data.userId)
@@ -86,16 +80,13 @@ File: <b>server.test.js</b>
 
 ```javascript
 // import SUTJS LTS
-const { sut, def } = require('sut@neo');
-
-// import SUT Assert Library
-const assert = require('sut@assert');
+const { sut, def, assert } = require('sut@neo');
 
 // Create Test Strategy/Gtto
 const exampleTestStrategy = () =>
     def('Example Testing ...', () =>
-        Assert.equal(1, 1, 'this test must passed')
-        Assert.okay(false, 'this test must failed')        
+        assert.equal(1, 1, 'this test must passed')
+        assert.okay(false, 'this test must failed')        
     )
 
 // Call main sut container to run tests
@@ -132,10 +123,7 @@ File: <b>app.test.js</b>
 
 ```javascript
 // import SUTJS LTS
-const { sut, def } = require('sut@neo');
-
-// import SUT Assert Library
-const assert = require('sut@assert');
+const { sut, def, assert } = require('sut@neo');
 
 // install node-emojy module
 // npm install node-meoji --save-dev
@@ -144,8 +132,8 @@ const emoji = require('node-emoji');
 // Create Test Strategy/Gtto
 const exampleTestStrategy = () =>
     def('Example Testing ...', () =>
-        Assert.equal(1, 1, 'this test must passed')
-        Assert.okay(false, 'this test must failed')        
+        assert.equal(1, 1, 'this test must passed')
+        assert.okay(false, 'this test must failed')        
     )
 
 // Call sut.template function
