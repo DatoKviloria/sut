@@ -1,0 +1,2 @@
+webpackJsonp([0x9427c64ab85d],{201:function(e,t,u){"use strict";function a(e){return e&&e.__esModule?e:{default:e}}t.__esModule=!0;var l=u(4),n=a(l),r=function(){return n.default.createElement("div",{className:"card-full",style:{backgroundColor:"#fff",marginTop:150}},n.default.createElement("h1",null,"NOT FOUND"),n.default.createElement("p",null,"You just hit a route that doesn't exist... the sadness."))};t.default=r,e.exports=t.default}});
+//# sourceMappingURL=component---src-pages-404-js-480c5f1373ec38262711.js.map
