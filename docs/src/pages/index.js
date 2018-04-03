@@ -11,11 +11,11 @@ const IndexPage = () => (
   <div>
     <div className='card-full'>
       <img style={{width: 150, height: 150}} src={logo} />
-      <p className='desc'>SUT@Neo is a feature-full JavaScript TDD framework for Node.js, Easy to make async testing. SUT@Neo allowing for flexible and accurate tdd pair programming.</p>
+      <p className='desc'>SUT@Neo is a feature-full TDD framework for Node.js, Easy to make async testing. SUT@Neo allowing for flexible and accurate tdd pair programming.</p>
       {/* <p>Now go build something great.</p> */}
       <div>
-        <iframe 
-          src="https://ghbtns.com/github-btn.html?user=dkvilo&repo=sut&type=star&count=true&size=large" 
+        <iframe
+          src="https://ghbtns.com/github-btn.html?user=dkvilo&repo=sut&type=star&count=true&size=large"
           style={{border: 'none'}} width="120px" height="30px"></iframe>
       </div>
       <div className='button-group'>
@@ -23,7 +23,7 @@ const IndexPage = () => (
         <Link className='button' to="/article/getting-started">Getting Started</Link>
       </div>
     </div>
-    {/* Section two */}
+    {/* Section two
     <div className='card-full' style={{padding: 100, background: '#fff', display: 'flex', flexDirection: 'row'}}>
       <div className='flex-col'>
         <img width={100} src={easyToSet} />
@@ -39,13 +39,13 @@ const IndexPage = () => (
         <img width={100} src={easyToUnd} />
         <h1>Easy to setup</h1>
         <p style={{padding: 20}}>Complete and easy to set-up JavaScript testing solution. Works out of the box for any React project</p>
-      </div>  
-    </div>
+      </div>
+    </div> */}
     {/* section three */}
     <div className='card-full' style={{padding: 100, background: '#fff', display: 'flex', flexDirection: 'row'}}>
       <div className='flex-col'>
         <h1>Beautiful & Simple</h1>
-        <p style={{padding: 20}}>Complete and easy to set-up JavaScript testing solution. Works out of the box for any React project</p>
+        <p style={{padding: 20}}>Complete and easy to set-up JavaScript testing solution.</p>
       </div>
       <div className='flex-col'>
         <img className='image-a' width={650} src={terminalImage} />
@@ -56,4 +56,3 @@ const IndexPage = () => (
 )
 
 export default IndexPage
-

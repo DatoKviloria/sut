@@ -1,6 +1,6 @@
 ---
 path: "/article/getting-started"
-date: "2018-03-21"
+date: "2018-04-03"
 title: "Getting Started with SUT 2.0 Neo"
 author: "Daivd Kviloria"
 ---
@@ -26,7 +26,7 @@ const assert = require('sut@assert');
 
 // Create Test Strategy/Gtto
 const exampleTestStrategy = () =>
-    def('Example Testing ...', () => 
+    def('Example Testing ...', () =>
         Assert.equal(1, 1, 'this test must passed')
         Assert.okay(false, 'this test must failed')        
     )
@@ -64,7 +64,7 @@ sut.include({
 // Create Test Strategy/Getto
 const testStrategyForAPI = () =>
     // Make CB function async
-    def('USER EP Testing ...', async () => 
+    def('USER EP Testing ...', async () =>
         Assert.equal(
             // Access to sut custom helper
             await sut.helper.api.response('https://jsonplaceholder.typicode.com/posts/1')
@@ -93,7 +93,7 @@ const assert = require('sut@assert');
 
 // Create Test Strategy/Gtto
 const exampleTestStrategy = () =>
-    def('Example Testing ...', () => 
+    def('Example Testing ...', () =>
         Assert.equal(1, 1, 'this test must passed')
         Assert.okay(false, 'this test must failed')        
     )
@@ -119,6 +119,13 @@ sut.connect(options);
 // Copy link and visit or share ...
 
 ```
+## Result
+## [Neo Tool](https://dkvilo.github.io/neo-tool/)
+![alt text](https://i.imgur.com/6SjHTP5.png)
+
+
+
+
 ## Customize Terminal output
 
 File: <b>app.test.js</b>
@@ -136,7 +143,7 @@ const emoji = require('node-emoji');
 
 // Create Test Strategy/Gtto
 const exampleTestStrategy = () =>
-    def('Example Testing ...', () => 
+    def('Example Testing ...', () =>
         Assert.equal(1, 1, 'this test must passed')
         Assert.okay(false, 'this test must failed')        
     )
@@ -155,3 +162,4 @@ sut(
     sut.stats
 )
 ```
+![Example](https://i.imgur.com/dmEy2iv.png)

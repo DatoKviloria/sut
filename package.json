@@ -1,12 +1,12 @@
 {
   "name": "sut",
-  "version": "1.9.2",
+  "version": "1.9.9",
   "description": "Small TDD lib for node",
   "main": "./index",
   "scripts": {
     "start": "node index.js"
   },
-  "private": true,
+  "private": false,
   "workspaces": [
     "packages/*"
   ],
@@ -33,7 +33,6 @@
     "convert-hrtime": "^2.0.0",
     "ip": "^1.1.5",
     "node-watch": "^0.5.8",
-    "nodemon": "^1.17.2",
     "setprototypeof": "^1.0.3",
     "socket.io": "^2.0.4"
   },
