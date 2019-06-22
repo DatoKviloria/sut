@@ -20,7 +20,3 @@
 * Commit your changes (git commit -m 'Add foo')
 * Push to the branch (git push origin feature/foo)
 * Create a new Pull Request
-
-
-# Original Author
-> David Kviloria @dkvilo
